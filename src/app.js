@@ -11,7 +11,7 @@ app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 app.set('views', './src/views');
 app.get('/', (req, res) => {
-  res.render('./src/views/home');
+  res.render('home');
 });
 app.listen(3000, () => {
   /* eslint-disable no-console */
