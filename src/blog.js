@@ -1,4 +1,6 @@
-const fs = require('fs');
+const { Buffer } = require('buffer');
+
+const fs = require('fs').promises;
 
 class Blog {
   constructor(filename) {
@@ -6,7 +8,6 @@ class Blog {
     this.Summary = '';
     this.Body = '';
     this.Filename = filename;
-    this.loadBlog();
   }
 
   getTitle() {
@@ -21,12 +22,11 @@ class Blog {
     return this.Body;
   }
 
-  loadBlog() {
-    fs.readFile(this.Filename, (err, data) => {
-      if (err) throw err;
-      this.Title = this.Filename;
-      this.Body = data.toString();
-    });
+  async loadBlog() {
+    const data = await fs.readFile(this.Filename);
+    this.Body = data.toString();
+    this.Title = this.Filename;
+    console.log(this.Body);
   }
 }
 module.exports = {
