@@ -10,7 +10,7 @@ pipeline{
         stage("lint"){
             steps{
                 echo "========lint========"
-                npm run lint
+                sh "npm run lint"
             }
         }
         stage("UnitTest"){
