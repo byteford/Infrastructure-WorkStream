@@ -1,6 +1,18 @@
 pipeline{
     agent any
     stages{
+        stage("Setup"){
+            steps{
+                echo "========Setup========"
+                npm install
+            }
+        }
+        stage("lint"){
+            steps{
+                echo "========lint========"
+                npm run lint
+            }
+        }
         stage("UnitTest"){
             steps{
                 echo "========UNIT TEST========"
