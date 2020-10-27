@@ -1,5 +1,3 @@
-const { Buffer } = require('buffer');
-
 const fs = require('fs').promises;
 
 class Blog {
@@ -26,7 +24,6 @@ class Blog {
     const data = await fs.readFile(this.Filename);
     this.Body = data.toString();
     this.Title = this.Filename;
-    console.log(this.Body);
   }
 }
 module.exports = {
