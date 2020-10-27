@@ -27,7 +27,7 @@ pipeline{
         stage("Build"){
             steps{
                 echo "====Build===="
-                sh "tar -czvf archive.tar.gz"
+                sh "tar -czvf archive.tar.gz ."
             }
         }
         stage("Intergration"){
