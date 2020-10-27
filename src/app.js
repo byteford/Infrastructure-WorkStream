@@ -13,6 +13,10 @@ app.set('views', './src/views');
 app.get('/', (req, res) => {
   res.render('home');
 });
+app.get("/blog/:id", (req, res) => {
+  res.render('blog');
+});
+
 app.listen(3000, () => {
   /* eslint-disable no-console */
   console.log('Listening on port 3000...');
