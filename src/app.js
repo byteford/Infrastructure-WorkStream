@@ -1,5 +1,10 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
+const { Blog } = require('./blog');
+
+const temp = new Blog('./milestones.txt');
+console.log(temp.getTitle());
+
 const app = express();
 const hbs = exphbs.create({
   extname: 'handlebars',
@@ -17,7 +22,7 @@ app.get("/blog/:id", (req, res) => {
   res.render('blog');
 });
 
-app.listen(3000, () => {
+app.listen(4000, () => {
   /* eslint-disable no-console */
   console.log('Listening on port 3000...');
   /* eslint-enable no-console */
