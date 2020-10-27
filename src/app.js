@@ -1,9 +1,8 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
-const { Blog } = require('./blog');
+// const { Blog } = require('./blog');
 
-const temp = new Blog('./milestones.txt');
-console.log(temp.getTitle());
+// const temp = new Blog('./milestones.txt');
 
 const app = express();
 const hbs = exphbs.create({
@@ -18,11 +17,12 @@ app.set('views', './src/views');
 app.get('/', (req, res) => {
   res.render('home');
 });
-app.get("/blog/:id", (req, res) => {
-  res.render('blog');
+app.get('/blog/:filename', (req, res) => {
+  const { filename } = req.params;
+  res.render('blog', { filename });
 });
 
-app.listen(4000, () => {
+app.listen(3000, () => {
   /* eslint-disable no-console */
   console.log('Listening on port 3000...');
   /* eslint-enable no-console */
