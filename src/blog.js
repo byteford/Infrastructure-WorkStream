@@ -1,26 +1,34 @@
+const fs = require('fs');
+
 class Blog {
   constructor(filename) {
     this.Title = '';
     this.Summary = '';
     this.Body = '';
     this.Filename = filename;
-    this.LoadBlog();
+    this.loadBlog();
   }
 
-  GetTitle() {
+  getTitle() {
     return this.Title;
   }
 
-  GetSumary() {
+  getSumary() {
     return this.Summary;
   }
 
-  GetBody() {
+  getBody() {
     return this.Body;
   }
 
-  LoadBlog() {
-    console.log(this.Filename);
+  loadBlog() {
+    fs.readFile(this.Filename, (err, data) => {
+      if (err) throw err;
+      this.Title = this.Filename;
+      this.Body = data.toString();
+    });
   }
 }
-export default Blog;
+module.exports = {
+  Blog,
+};

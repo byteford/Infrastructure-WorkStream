@@ -1,6 +1,9 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
-// const blog = require('./blog');
+const { Blog } = require('./blog');
+
+const temp = new Blog('./milestones.txt');
+console.log(temp.getTitle());
 const app = express();
 
 const hbs = exphbs.create({
