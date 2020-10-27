@@ -1,5 +1,6 @@
 pipeline{
     agent any
+
     stages{
         stage("Setup"){
             steps{
@@ -26,6 +27,7 @@ pipeline{
         stage("Build"){
             steps{
                 echo "====Build===="
+                sh "tar -czvf archive.tar.gz"
             }
         }
         stage("Intergration"){
@@ -38,5 +40,11 @@ pipeline{
                 echo "====Publish===="
             }
         }
+    }
+    post{
+        always{
+            archiveArtifacts artifacts: "archive.tar.gz", fingerprint: true, followSymlinks: false
+        }
+
     }
 }
