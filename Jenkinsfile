@@ -4,7 +4,7 @@ pipeline{
         stage("Setup"){
             steps{
                 echo "========Setup========"
-                npm install
+                sh "npm install"
             }
         }
         stage("lint"){
