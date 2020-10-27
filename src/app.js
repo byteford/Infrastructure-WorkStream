@@ -4,12 +4,14 @@ const exphbs = require('express-handlebars');
 const app = express();
 
 const hbs = exphbs.create({
-  extname      :'hbs',
-  layoutsDir   : './src/views/layouts',
-  defaultLayout: 'main'
-});
 
-app.engine('handlebars', exphbs());
+  extname: 'handlebars',
+  layoutsDir: './src/views/layouts',
+  defaultLayout: 'main',
+});
+app.set('views', `${__dirname}/views`);
+app.engine('handlebars', hbs.engine);
+
 app.set('view engine', 'handlebars');
 
 app.set('views', './src/views');
