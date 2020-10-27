@@ -13,7 +13,7 @@ class Blog {
     return this.Title;
   }
 
-  getSumary() {
+  getSummary() {
     return this.Summary;
   }
 

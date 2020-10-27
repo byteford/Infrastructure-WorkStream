@@ -1,8 +1,6 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
-// const { Blog } = require('./blog');
-
-// const temp = new Blog('./milestones.txt');
+const { Blog } = require('./blog');
 
 const app = express();
 const hbs = exphbs.create({
@@ -19,7 +17,8 @@ app.get('/', (req, res) => {
 });
 app.get('/blog/:filename', (req, res) => {
   const { filename } = req.params;
-  res.render('blog', { filename });
+  const blog = new Blog(filename);
+  res.render('blog', { blog });
 });
 
 app.listen(3000, () => {
