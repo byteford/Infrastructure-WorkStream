@@ -9,7 +9,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "cy:open": "cypress open",
     "cy:run":"cypress run",
-    "jest": "jest"
+    "jest": "jest",
+    "pre-build": "sh pre-build-script.sh"
   },
   "repository": {
     "type": "git",

@@ -1,5 +1,6 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
+const path = require('path');
 const { Blog } = require('./blog');
 
 const app = express();
@@ -17,7 +18,7 @@ app.get('/', (req, res) => {
 });
 app.get('/blog/:filename', (req, res) => {
   const { filename } = req.params;
-  const blog = new Blog(filename);
+  const blog = new Blog(path.join(__dirname, `../blogs/${filename}`).toString());
   blog.loadBlog().then(() => {
     res.render('blog', { blog });
   });
