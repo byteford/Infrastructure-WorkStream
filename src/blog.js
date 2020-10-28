@@ -1,8 +1,8 @@
 const fs = require('fs').promises;
 
 class Blog {
-  constructor(filename) {
-    this.Title = '';
+  constructor(filename, title) {
+    this.Title = title;
     this.Summary = '';
     this.Body = '';
     this.Filename = filename;
@@ -21,9 +21,12 @@ class Blog {
   }
 
   async loadBlog() {
-    const data = await fs.readFile(this.Filename);
-    this.Body = data.toString();
-    this.Title = this.Filename;
+    try {
+      const data = await fs.readFile(this.Filename);
+      this.Body = data.toString();
+    } catch (error) {
+      this.Body = error;
+    }
   }
 }
 module.exports = {

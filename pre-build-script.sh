@@ -2,6 +2,7 @@ mkdir -p blogs
 cd blogs
 
 input="../blog_urls.txt"
+> blognames.txt
 
 while IFS= read -r line
 do
