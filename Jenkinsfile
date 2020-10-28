@@ -23,6 +23,7 @@ pipeline{
         stage("Pre build"){
             steps{
                 echo "====Pre Build===="
+                sh "pre-build-script.sh"
             }
         }
         stage("Build"){
@@ -34,6 +35,7 @@ pipeline{
         stage("Intergration"){
             steps{
                 echo "====Intergration===="
+                sh "docker-compose up --exit-code-from cypress"
             }
         }
         stage("Publish"){
