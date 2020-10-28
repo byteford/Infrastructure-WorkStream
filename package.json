@@ -9,7 +9,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "cy:open": "cypress open",
     "cy:run":"cypress run",
-    "jest": "jest"
+    "jest": "jest",
+    "pre-build": "curl https://academy-project-blogs.s3-eu-west-1.amazonaws.com/milestones.txt --output blog1.txt"
   },
   "repository": {
     "type": "git",
