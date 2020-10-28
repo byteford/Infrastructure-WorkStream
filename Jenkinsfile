@@ -34,6 +34,7 @@ pipeline{
         stage("Intergration"){
             steps{
                 echo "====Intergration===="
+                sh "docker-compose up --exit-code-from cypress"
             }
         }
         stage("Publish"){
