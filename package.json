@@ -10,7 +10,7 @@
     "cy:open": "cypress open",
     "cy:run":"cypress run",
     "jest": "jest",
-    "pre-build": "curl https://academy-project-blogs.s3-eu-west-1.amazonaws.com/milestones.txt --output blog1.txt"
+    "pre-build": "sh pre-build-script.sh"
   },
   "repository": {
     "type": "git",
