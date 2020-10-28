@@ -1,8 +1,8 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
+const { Blog } = require('./blog');
 
 const app = express();
-
 const hbs = exphbs.create({
   extname: 'handlebars',
   layoutsDir: './src/views/layouts',
@@ -11,9 +11,16 @@ const hbs = exphbs.create({
 app.set('views', `${__dirname}/views`);
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
-
+app.set('views', './src/views');
 app.get('/', (req, res) => {
   res.render('home');
+});
+app.get('/blog/:filename', (req, res) => {
+  const { filename } = req.params;
+  const blog = new Blog(filename);
+  blog.loadBlog().then(() => {
+    res.render('blog', { blog });
+  });
 });
 
 app.listen(3000, () => {
