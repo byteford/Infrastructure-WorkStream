@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 /* globals Cypress cy */
-describe('CI test for homepage', () => {
+describe('CI test for blog pages', () => {
   // refactor with a beforeEach for cy.visit command
   it('should open the homepage and click on the blog1 link to display the correct url', () => {
     cy.visit(Cypress.env('HOST'));
