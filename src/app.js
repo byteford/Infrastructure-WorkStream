@@ -18,7 +18,9 @@ app.get('/', (req, res) => {
 app.get('/blog/:filename', (req, res) => {
   const { filename } = req.params;
   const blog = new Blog(filename);
-  res.render('blog', { blog });
+  blog.loadBlog().then(() => {
+    res.render('blog', { blog });
+  });
 });
 
 app.listen(3000, () => {

@@ -17,6 +17,7 @@ pipeline{
         stage("UnitTest"){
             steps{
                 echo "========UNIT TEST========"
+                sh "npm run jest"
             }
         }
         stage("Pre build"){
