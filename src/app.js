@@ -1,6 +1,8 @@
+/* eslint-disable no-restricted-syntax */
 const express = require('express');
 const exphbs = require('express-handlebars');
 const path = require('path');
+const fs = require('fs');
 const { Blog } = require('./blog');
 
 const app = express();
@@ -14,7 +16,8 @@ app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 app.set('views', './src/views');
 app.get('/', (req, res) => {
-  res.render('home');
+  const blognames = fs.readFileSync('./blogs/blognames.txt').toString().split('\n');
+  res.render('home', { blognames });
 });
 app.get('/blog/:filename', (req, res) => {
   const { filename } = req.params;
