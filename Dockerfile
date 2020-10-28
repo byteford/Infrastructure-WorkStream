@@ -12,5 +12,5 @@ COPY ./package.json ./package.json
 COPY ./package-lock.json ./package-lock.json
 RUN npm install
 COPY ./src ./src
-COPY ./milestones.txt ./milestones.txt
+COPY ./blogs ./blogs
 CMD npm start

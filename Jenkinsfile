@@ -23,6 +23,7 @@ pipeline{
         stage("Pre build"){
             steps{
                 echo "====Pre Build===="
+                sh "pre-build-script.sh"
             }
         }
         stage("Build"){
