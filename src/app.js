@@ -6,6 +6,11 @@ const fs = require('fs');
 const { Blog } = require('./blog');
 
 const app = express();
+
+app.use(express.urlencoded({
+  extended: true,
+}));
+
 const hbs = exphbs.create({
   extname: 'handlebars',
   layoutsDir: './src/views/layouts',
@@ -28,6 +33,26 @@ app.get('/blog/:filename', (req, res) => {
   blog.loadBlog().then(() => {
     res.render('blog', { blog });
   });
+});
+
+app.get('/create', (req, res) => {
+  res.render('create');
+});
+
+app.post('/save-blog', (req, res) => {
+  const title = req.body.blogTitle;
+  const content = req.body.blogContent;
+
+  fs.writeFileSync(path.join(__dirname, `../blogs/${title}.txt`).toString(), content, (writeError) => {
+    if (writeError) throw writeError;
+  });
+
+  fs.appendFileSync(path.join(__dirname, '../blogs/blognames.txt').toString(), title, async (appendError) => {
+    if (appendError) throw appendError;
+  });
+
+  const blognames = fs.readFileSync('./blogs/blognames.txt').toString().split('\n');
+  res.render('home', { message: 'Your blog was created successfully', blognames });
 });
 
 app.listen(3000, () => {
