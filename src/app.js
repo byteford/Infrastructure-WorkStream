@@ -47,12 +47,31 @@ app.post('/save-blog', (req, res) => {
     if (writeError) throw writeError;
   });
 
-  fs.appendFileSync(path.join(__dirname, '../blogs/blognames.txt').toString(), title, async (appendError) => {
+  fs.appendFileSync(path.join(__dirname, '../blogs/blognames.txt').toString(), `${title}\n`, async (appendError) => {
     if (appendError) throw appendError;
   });
 
   const blognames = fs.readFileSync('./blogs/blognames.txt').toString().split('\n');
   res.render('home', { message: 'Your blog was created successfully', blognames });
+});
+
+app.get('/delete/:title', (req, res) => {
+  const { title } = req.params;
+  fs.unlinkSync(path.join(__dirname, `../blogs/${title}.txt`).toString());
+
+  let blognames = fs.readFileSync('./blogs/blognames.txt').toString().split('\n');
+  blognames = blognames.filter((blogname) => blogname !== title);
+
+  blognames = blognames.join('\n');
+  // eslint-disable-next-line no-console
+  console.log(`blogs: ${blognames}`);
+  fs.writeFileSync(path.join(__dirname, '../blogs/blognames.txt').toString(), blognames, (writeError) => {
+    if (writeError) throw writeError;
+  });
+
+  blognames = fs.readFileSync('./blogs/blognames.txt').toString().split('\n');
+
+  res.render('home', { message: 'Your blog was successfully deleted', blognames });
 });
 
 app.listen(3000, () => {
