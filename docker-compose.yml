@@ -6,8 +6,7 @@ services:
     build: .
     ports:
       - 3000:3000
-    volumes: 
-      - ./:./
+
   # Cypress container
   cypress:
     image: "cypress/included:5.0.0"
