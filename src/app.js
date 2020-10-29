@@ -74,6 +74,45 @@ app.get('/delete/:title', (req, res) => {
   res.render('home', { message: 'Your blog was successfully deleted', blognames });
 });
 
+app.get('/update/:title', (req, res) => {
+  const { title } = req.params;
+  const blog = new Blog(path.join(__dirname, `../blogs/${title}.txt`).toString(), title);
+  blog.loadBlog().then(() => {
+    res.render('update', { blog });
+  });
+});
+
+app.post('/update-blog/:oldTitle', (req, res) => {
+  const { oldTitle } = req.params;
+  const newTitle = req.body.blogTitle;
+  const content = req.body.blogContent;
+  // eslint-disable-next-line no-console
+  console.log(`OLD TITLE: ${oldTitle}`);
+  //  remove old blog using oldTitle
+  fs.unlinkSync(path.join(__dirname, `../blogs/${oldTitle}.txt`).toString());
+
+  //  remove from blognames.txt using oldTitle
+  let blognames = fs.readFileSync('./blogs/blognames.txt').toString().split('\n');
+  blognames = blognames.filter((blogname) => blogname !== oldTitle);
+  blognames = blognames.join('\n');
+  fs.writeFileSync(path.join(__dirname, '../blogs/blognames.txt').toString(), blognames, (writeError) => {
+    if (writeError) throw writeError;
+  });
+
+  //  add new title to blognames.txt using newTitle
+  fs.appendFileSync(path.join(__dirname, '../blogs/blognames.txt').toString(), `${newTitle}\n`, async (appendError) => {
+    if (appendError) throw appendError;
+  });
+
+  //  write file with updated contents using newTitle and content
+  fs.writeFileSync(path.join(__dirname, `../blogs/${newTitle}.txt`).toString(), content, (writeError) => {
+    if (writeError) throw writeError;
+  });
+
+  blognames = fs.readFileSync('./blogs/blognames.txt').toString().split('\n');
+  res.render('home', { message: 'Your blog was successfully updated', blognames });
+});
+
 app.listen(3000, () => {
   /* eslint-disable no-console */
   console.log('Listening on port 3000...');
