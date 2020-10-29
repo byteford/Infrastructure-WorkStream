@@ -3,10 +3,13 @@
     <p class="text-justify">{{ blog.Body }}</p>
 
     <div class="row">
-        <div class="col-6 text-right">
-            <a href="/" class="btn btn-primary">Back to blog list</a>
+        <div class="col-4 text-right">
+            <a href="/" class="btn btn-secondary">Back to blog list</a>
         </div>
-        <div class="col-6 text-left">
+        <div class="col-4">
+            <a href="/update/{{{ blog.Title }}}" class="btn btn-primary">Edit blog</a>
+        </div>
+        <div class="col-4 text-left">
             <a href="/delete/{{{ blog.Title }}}" class="btn btn-danger">Delete blog</a>
         </div>
     </div>
