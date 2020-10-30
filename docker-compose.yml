@@ -20,4 +20,4 @@ services:
     working_dir: /e2e
     volumes:
       - ./:/e2e
-      command: --record --key c275012c-874f-4d35-b94f-fc62dfbe5d6d
+    command: --record --key c275012c-874f-4d35-b94f-fc62dfbe5d6d
