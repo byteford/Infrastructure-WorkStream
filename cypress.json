@@ -1,5 +1,6 @@
 {
-    "env": {
-        "HOST": "http://localhost:3000"
-      }
+  "env": {
+    "HOST": "http://localhost:3000"
+  },
+  "projectId": "sytzth"
 }

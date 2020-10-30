@@ -46,7 +46,7 @@ pipeline{
             post{
             always{
                 sh "docker-compose rm -f"
-                sh "docker rmi BlogBoardPipe_express-app"
+                sh "docker rmi blogboardpipe_express-app"
             }
 
         }
