@@ -44,6 +44,13 @@ pipeline{
                 sh "docker-compose up --exit-code-from cypress"
             }
         }
+        post{
+            always{
+                sh "docker-compose rm -f"
+                sh "docker rmi blogboard_express-app"
+            }
+
+        }
         stage("Publish"){
             steps{
                 echo "====Publish===="
