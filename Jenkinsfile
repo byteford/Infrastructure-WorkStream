@@ -46,7 +46,7 @@ pipeline{
             post{
             always{
                 sh "docker-compose rm -f"
-                sh "docker rmi ${env.JOB_NAME%%/*}_express-app"
+                sh "docker rmi BlogBoardPipe_express-app"
             }
 
         }
