@@ -17,7 +17,7 @@ pipeline{
         stage("UnitTest"){
             steps{
                 echo "========UNIT TEST========"
-                sh "npm run jest"
+                sh "npm run jest -- --coverage"
             }
         }
         stage("Cleen Up"){
@@ -43,14 +43,15 @@ pipeline{
                 echo "====Intergration===="
                 sh "docker-compose up --exit-code-from cypress"
             }
-        }
-        post{
+            post{
             always{
                 sh "docker-compose rm -f"
                 sh "docker rmi blogboard_express-app"
             }
 
         }
+        }
+        
         stage("Publish"){
             steps{
                 echo "====Publish===="
