@@ -15,7 +15,7 @@ do
   filesize=$(wc -c < ${blogname}.txt)
   echo ${filesize}
   echo ${expectedSize}
-  if [[ ${expectedSize} -eq ${filesize} ]] && [[ ${blogname} =~ ^[A-Za-z_]+$ ]]
+  if [ ${expectedSize} -eq ${filesize} ] && [[ ${blogname} =~ ^[A-Za-z_]+$ ]]
    then
     echo "${blogname} passed"
     echo ${blogname} >> blognames.txt
