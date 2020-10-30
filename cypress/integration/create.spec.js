@@ -20,6 +20,7 @@ describe('CI test for creating a blog', () => {
     cy.get('#blogTitle').type('New Blog');
     cy.get('#blogContent').type('This is my new blog.');
     cy.get('form > .btn').click({ force: true });
-    cy.get('[href="/blog/New Blog"] > h2').should('be.visible');
+    cy.get('[href="/blog/New Blog"] > h2').should('be.visible').click({ force: true });
+    cy.get('.text-left > .btn').click({ force: true });
   });
 });
