@@ -27,4 +27,5 @@ module "ECS" {
   owner    = var.owner
   Repo_URL = module.ECR.repo_url
   subnets  = list(module.Network.subnet_public.id)
+  SecGroup = module.Network.SecGroupAll.id
 }
