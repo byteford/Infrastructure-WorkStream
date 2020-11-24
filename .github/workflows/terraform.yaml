@@ -41,6 +41,7 @@ jobs:
 
 
   deploy:
+    needs: [Terraform]
     name: Upload to Amazon ECR - 2nd Version
     runs-on: ubuntu-latest
     steps:
