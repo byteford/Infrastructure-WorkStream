@@ -14,6 +14,7 @@ jobs:
     defaults:
       run:
         shell: bash
+        working-directory: Terraform
 
     steps:
 
@@ -24,9 +25,6 @@ jobs:
       uses: hashicorp/setup-terraform@v1
       with:
         cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
-    
-    - name: Access Terraform directory
-      run: cd Terraform
 
     - name: Terraform Init
       run: terraform init
