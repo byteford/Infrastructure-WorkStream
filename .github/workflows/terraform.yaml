@@ -76,7 +76,8 @@ jobs:
       with:
         task-definition: task-definition.json
         container-name: james-nick
-        image: james-nick
+        image: james-nick:latest
+        
 
 
     - name: Deploy Amazon ECS task definition
