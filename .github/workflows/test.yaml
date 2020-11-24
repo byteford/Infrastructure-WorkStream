@@ -25,6 +25,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Cypress build
-    - run: |
-      bash pre-build-script.sh
-      docker-compose up --exit-code-from cypress
+      run: |
+        bash pre-build-script.sh
+        docker-compose up --exit-code-from cypress
