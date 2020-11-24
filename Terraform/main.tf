@@ -4,6 +4,6 @@ provider "aws" {
 
 module "ECR" {
   source = "./ECR"
-  name   = "James-Nick"
+  name   = "james-nick"
   owner  = "James-Nick"
 }
