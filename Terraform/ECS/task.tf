@@ -8,7 +8,13 @@ resource "aws_ecs_task_definition" "webService" {
     "image": "${var.Repo_URL}",
     "memory": 128,
     "memoryReservation": 64,
-    "name": "${var.name}"
+    "name": "${var.name}",
+    "portMappings": [
+      {
+        "containerPort": 3000,
+        "hostPort": 3000
+      }
+    ]
   }
 ]
 DEFINITION
