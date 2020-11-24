@@ -1,6 +1,6 @@
 resource "aws_ecs_task_definition" "webService" {
-  family                = "service"
-  container_definitions = <<DEFINITION
+  family                   = "service"
+  container_definitions    = <<DEFINITION
 [
   {
     "cpu": 128,
@@ -12,14 +12,10 @@ resource "aws_ecs_task_definition" "webService" {
   }
 ]
 DEFINITION
+  requires_compatibilities = ["FARGATE"]
+  cpu                      = "512"
+  memory                   = "1024"
+  network_mode             = "awsvpc"
+  execution_role_arn       = data.aws_iam_role.ecs_task_execution_role.arn
 
-  volume {
-    name      = "service-storage"
-    host_path = "/ecs/service-storage"
-  }
-
-  placement_constraints {
-    type       = "memberOf"
-    expression = "attribute:ecs.availability-zone in [eu-west-1a]"
-  }
 }

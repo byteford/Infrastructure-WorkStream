@@ -7,3 +7,6 @@ variable "owner" {
 variable "Repo_URL" {
   type = string
 }
+variable "subnets" {
+  type = list(string)
+}
