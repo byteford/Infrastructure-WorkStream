@@ -23,6 +23,8 @@ jobs:
   cypress:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v2
+    - name: Cypress build
     - run: |
       bash pre-build-script.sh
       docker-compose up --exit-code-from cypress
