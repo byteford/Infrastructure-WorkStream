@@ -13,6 +13,12 @@ provider "aws" {
 
 module "ECR" {
   source = "./ECR"
-  name   = "james-nick"
-  owner  = "James-Nick"
+  name   = var.name
+  owner  = var.owner
+}
+module "ECS" {
+  source   = "./ECS"
+  name     = var.name
+  owner    = var.owner
+  Repo_URL = module.ECR.repo_url
 }
