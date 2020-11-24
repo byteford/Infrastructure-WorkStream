@@ -9,6 +9,8 @@ resource "aws_ecs_service" "web" {
 
   network_configuration {
     subnets = var.subnets
+    security_groups = list(var.SecGroup)
+    assign_public_ip = true
   }
 
 
