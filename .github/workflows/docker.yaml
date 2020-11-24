@@ -20,7 +20,7 @@ jobs:
     - name: Build, tag, and push image to Amazon ECR
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: 603825719481.dkr.ecr.eu-west-2.amazonaws.com/james-nick
+        ECR_REPOSITORY: james-nick
         IMAGE_TAG: prod-latest
       run: |
         bash pre-build-script.sh
