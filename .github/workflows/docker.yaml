@@ -3,6 +3,7 @@ on:
     branches: [ main ]
 jobs:
   deploy:
+    needs: [terraform]
     name: Upload to Amazon ECR - 2nd Version
     runs-on: ubuntu-latest
     steps:
