@@ -10,11 +10,6 @@ resource "aws_ecs_service" "web" {
   network_configuration {
     subnets = var.subnets
   }
-  /* load_balancer {
-    target_group_arn = aws_lb_target_group.foo.arn
-    container_name   = "mongo"
-    container_port   = 8080
-  }*/
 
 
 }

@@ -12,7 +12,7 @@ provider "aws" {
 }
 module "Network" {
   source = "./Network"
-   name   = var.name
+  name   = var.name
   owner  = var.owner
 
 }
@@ -26,5 +26,5 @@ module "ECS" {
   name     = var.name
   owner    = var.owner
   Repo_URL = module.ECR.repo_url
-  subnets    = list(module.Network.subnet_public.id)
+  subnets  = list(module.Network.subnet_public.id)
 }
