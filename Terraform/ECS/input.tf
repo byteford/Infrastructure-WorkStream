@@ -10,3 +10,6 @@ variable "Repo_URL" {
 variable "subnets" {
   type = list(string)
 }
+variable "SecGroup" {
+  type = string
+}
