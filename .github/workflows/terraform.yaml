@@ -84,5 +84,5 @@ jobs:
       with:
         task-definition: ${{ steps.task-def.outputs.task-definition }}
         service: my-service
-        cluster: my-cluster
+        cluster: james-nick
         wait-for-service-stability: true
