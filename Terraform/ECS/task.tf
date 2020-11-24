@@ -1,5 +1,5 @@
 resource "aws_ecs_task_definition" "webService" {
-  family                   = "service"
+  family                   = var.name
   container_definitions    = <<DEFINITION
 [
   {
