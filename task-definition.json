@@ -16,7 +16,12 @@
         "command": null,
         "linuxParameters": null,
         "cpu": 128,
-        "environment": [],
+        "environment": [
+            {
+              "name": "port",
+              "value": "80"
+            }
+        ],
         "resourceRequirements": null,
         "ulimits": null,
         "dnsServers": null,
