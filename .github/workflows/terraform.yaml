@@ -64,14 +64,14 @@ jobs:
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: james-nick
-        IMAGE_TAG: latest
+        IMAGE_TAG: ${{ github.sha }}:${{ github.ref }}
       run: |
         bash pre-build-script.sh
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
     - name: Image ID to AWS ECS task definition
-      id: task-def
+      id: ${{ github.sha }}:${{ github.ref }}
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
         task-definition: task-definition.json
