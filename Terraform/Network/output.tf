@@ -4,3 +4,6 @@ output "subnet_public" {
 output "SecGroupAll" {
   value = aws_security_group.allow_all
 }
+output "lbTarget" {
+  value = aws_lb_target_group.main
+}

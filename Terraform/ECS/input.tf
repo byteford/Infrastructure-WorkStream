@@ -13,3 +13,6 @@ variable "subnets" {
 variable "SecGroup" {
   type = string
 }
+variable "lbTarget" {
+  type = string
+}
