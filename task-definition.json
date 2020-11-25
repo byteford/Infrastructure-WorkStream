@@ -9,9 +9,8 @@
         "entryPoint": null,
         "portMappings": [
           {
-            "hostPort": 3000,
             "protocol": "tcp",
-            "containerPort": 3000
+            "containerPort": 80
           }
         ],
         "command": null,

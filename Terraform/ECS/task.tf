@@ -19,7 +19,7 @@ resource "aws_ecs_task_definition" "webService" {
           "name": "port",
           "value": "80"
         }
-        ]
+      ]
   }
 ]
 DEFINITION
