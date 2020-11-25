@@ -9,7 +9,7 @@ resource "aws_ecs_service" "web" {
   load_balancer {
     target_group_arn = var.lbTarget
     container_name   = var.name
-    container_port   = 3000
+    container_port   = 80
   }
   network_configuration {
     subnets          = var.subnets

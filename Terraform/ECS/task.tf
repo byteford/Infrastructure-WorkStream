@@ -11,10 +11,15 @@ resource "aws_ecs_task_definition" "webService" {
     "name": "${var.name}",
     "portMappings": [
       {
-        "containerPort": 3000,
-        "hostPort": 3000
+        "containerPort": 80
       }
-    ]
+    ],
+    "environment": [
+        {
+          "name": "port",
+          "value": "80"
+        }
+        ]
   }
 ]
 DEFINITION

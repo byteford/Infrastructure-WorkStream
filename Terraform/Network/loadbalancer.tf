@@ -1,6 +1,6 @@
 resource "aws_lb_target_group" "main" {
   name        = var.name
-  port        = 3000
+  port        = 80
   protocol    = "HTTP"
   target_type = "ip"
   vpc_id      = aws_vpc.main.id
@@ -20,7 +20,7 @@ resource "aws_lb" "main" {
 }
 resource "aws_lb_listener" "main" {
   load_balancer_arn = aws_lb.main.arn
-  port              = "3000"
+  port              = "80"
   protocol          = "HTTP"
 
   default_action {
