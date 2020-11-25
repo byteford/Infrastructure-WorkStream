@@ -8,7 +8,7 @@ on:
 
 jobs:
   terraform:
-    name: 'Terraform'
+    name: 'terraform'
     runs-on: ubuntu-latest
     
     defaults:
@@ -41,7 +41,7 @@ jobs:
 
 
   deploy:
-    needs: [Terraform]
+    needs: [terraform]
     name: Upload to Amazon ECR - 2nd Version
     runs-on: ubuntu-latest
     steps:
@@ -64,7 +64,7 @@ jobs:
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: james-nick
-        IMAGE_TAG: latest
+        IMAGE_TAG: ${{ github.sha }}
       run: |
         bash pre-build-script.sh
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
@@ -76,7 +76,7 @@ jobs:
       with:
         task-definition: task-definition.json
         container-name: james-nick
-        image: 603825719481.dkr.ecr.eu-west-2.amazonaws.com/james-nick
+        image: 603825719481.dkr.ecr.eu-west-2.amazonaws.com/james-nick:${{ github.sha }}
 
     - name: Deploy Amazon ECS task definition
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
