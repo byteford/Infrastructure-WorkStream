@@ -1,4 +1,4 @@
-resource "aws_ecs_task_definition" "webService" {
+/*resource "aws_ecs_task_definition" "webService" {
   family                   = var.name
   container_definitions    = <<DEFINITION
 [
@@ -29,4 +29,4 @@ DEFINITION
   network_mode             = "awsvpc"
   execution_role_arn       = data.aws_iam_role.ecs_task_execution_role.arn
 
-}
+}*/
