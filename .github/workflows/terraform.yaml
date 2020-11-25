@@ -8,7 +8,7 @@ on:
 
 jobs:
   terraform:
-    name: 'Terraform'
+    name: 'terraform'
     runs-on: ubuntu-latest
     
     defaults:
@@ -41,7 +41,7 @@ jobs:
 
 
   deploy:
-    needs: [Terraform]
+    needs: [terraform]
     name: Upload to Amazon ECR - 2nd Version
     runs-on: ubuntu-latest
     steps:
