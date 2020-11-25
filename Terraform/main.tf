@@ -22,6 +22,7 @@ module "ECR" {
   owner  = var.owner
 }
 module "ECS" {
+  depends_on = [ module.Network ]
   source   = "./ECS"
   name     = var.name
   owner    = var.owner
