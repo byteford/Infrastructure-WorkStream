@@ -1,6 +1,6 @@
 resource "aws_security_group" "allow_all" {
-  name        = var.name
-  vpc_id      = aws_vpc.main.id
+  name   = var.name
+  vpc_id = aws_vpc.main.id
 
   ingress {
     from_port   = 0

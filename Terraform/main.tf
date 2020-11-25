@@ -22,10 +22,12 @@ module "ECR" {
   owner  = var.owner
 }
 module "ECS" {
+  depends_on = [ module.Network ]
   source   = "./ECS"
   name     = var.name
   owner    = var.owner
   Repo_URL = module.ECR.repo_url
-  subnets  = list(module.Network.subnet_public.id)
+  subnets  = module.Network.subnet_public.*.id
   SecGroup = module.Network.SecGroupAll.id
+  lbTarget = module.Network.lbTarget.arn
 }
