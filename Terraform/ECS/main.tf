@@ -6,7 +6,7 @@ resource "aws_ecs_service" "web" {
   #iam_role        = aws_iam_role.foo.arn
   #depends_on      = [aws_iam_role_policy.foo]
   launch_type = "FARGATE"
-
+ 
   network_configuration {
     subnets = var.subnets
     security_groups = list(var.SecGroup)
