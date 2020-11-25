@@ -6,7 +6,7 @@ const fs = require('fs');
 const { Blog } = require('./blog');
 
 const app = express();
-
+const port = process.env.port || 3000;
 app.use(express.urlencoded({
   extended: true,
 }));
@@ -113,8 +113,8 @@ app.post('/update-blog/:oldTitle', (req, res) => {
   res.render('home', { message: 'Your blog was successfully updated', blognames });
 });
 
-app.listen(3000, () => {
+app.listen(port, () => {
   /* eslint-disable no-console */
-  console.log('Listening on port 3000...');
+  console.log('Listening on port ',port,'...');
   /* eslint-enable no-console */
 });
