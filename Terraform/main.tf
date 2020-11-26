@@ -14,7 +14,11 @@ module "Network" {
   source = "./Network"
   name   = var.name
   owner  = var.owner
-
+}
+module "CW" {
+  source = "./cloudwatch"
+  name   = var.name
+  owner  = var.owner
 }
 module "ECR" {
   source = "./ECR"

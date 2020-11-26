@@ -1,9 +1,10 @@
 resource "aws_ecs_service" "web" {
-  name    = "web"
-  cluster = aws_ecs_cluster.main.id
-  task_definition = aws_ecs_task_definition.webService.arn
-  desired_count = 1
-  launch_type   = "FARGATE"
+  name                              = "web"
+  cluster                           = aws_ecs_cluster.main.id
+  task_definition                   = aws_ecs_task_definition.webService.arn
+  desired_count                     = 1
+  launch_type                       = "FARGATE"
+  health_check_grace_period_seconds = "60"
   load_balancer {
     target_group_arn = var.lbTarget
     container_name   = var.name

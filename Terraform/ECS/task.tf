@@ -3,11 +3,11 @@ resource "aws_ecs_task_definition" "webService" {
   container_definitions    = <<DEFINITION
 [
   {
-    "cpu": 128,
+    "cpu": 512,
     "essential": true,
     "image": "${var.Repo_URL}",
-    "memory": 128,
-    "memoryReservation": 64,
+    "memory": 1024,
+    "memoryReservation": 1024,
     "name": "${var.name}",
     "portMappings": [
       {
