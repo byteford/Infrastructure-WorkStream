@@ -1,3 +1,4 @@
+
 resource "aws_appautoscaling_target" "ecs_target" {
   max_capacity       = 4
   min_capacity       = 1
@@ -10,16 +11,14 @@ resource "aws_appautoscaling_policy" "ecs_policy" {
   service_namespace  = aws_appautoscaling_target.ecs_target.service_namespace
   scalable_dimension = aws_appautoscaling_target.ecs_target.scalable_dimension
   resource_id        = aws_appautoscaling_target.ecs_target.resource_id
-  policy_type        = "StepScaling"
+  policy_type        = "TargetTrackingScaling"
 
-  step_scaling_policy_configuration {
-    adjustment_type         = "ChangeInCapacity"
-    cooldown                = 60
-    metric_aggregation_type = "Average"
-
-    step_adjustment {
-      metric_interval_lower_bound = 1
-      scaling_adjustment          = 1
+  target_tracking_scaling_policy_configuration {
+    predefined_metric_specification {
+      predefined_metric_type = "ECSServiceAverageCPUUtilization"
     }
+    disable_scale_in   = true
+    target_value       = 4
+    scale_out_cooldown = 300
   }
 }
