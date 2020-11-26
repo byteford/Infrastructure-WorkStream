@@ -11,5 +11,5 @@ variable "loadbalancer_arn_suffix" {
 
 variable "res_threshold" {
   type    = number
-  default = 1000
+  default = 1
 }

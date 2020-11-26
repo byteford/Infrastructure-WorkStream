@@ -7,7 +7,7 @@ resource "aws_cloudwatch_metric_alarm" "response_time" {
   period                    = "180"
   statistic                 = "Average"
   threshold                 = var.res_threshold
-  alarm_description         = "This metric monitors ec2 cpu utilization"
+  alarm_description         = "This metric monitors load balancer response time"
   insufficient_data_actions = []
   dimensions = {
     LoadBalancer = var.loadbalancer_arn_suffix
