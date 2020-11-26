@@ -19,7 +19,7 @@ module "CW" {
   source           = "./cloudwatch"
   name             = var.name
   owner            = var.owner
-  loadbalancer_arn = module.Network.loadbalancer.arn
+  loadbalancer_arn = module.Network.loadbalancer.arn_suffix
 }
 module "ECR" {
   source = "./ECR"
