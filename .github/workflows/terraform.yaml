@@ -7,14 +7,14 @@ on:
   pull_request:
 
 jobs:
-  terraform:
-    name: 'terraform'
+  terraform_base:
+    name: 'terraform_base'
     runs-on: ubuntu-latest
     
     defaults:
       run:
         shell: bash
-        working-directory: Terraform
+        working-directory: Terraform_Base
 
     steps:
 
@@ -24,6 +24,7 @@ jobs:
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
       with:
+        terraform_wrapper: false
         cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
     - name: Terraform Init
@@ -41,7 +42,7 @@ jobs:
 
 
   deploy:
-    needs: [terraform]
+    needs: [terraform_base]
     name: Upload to Amazon ECR - 2nd Version
     runs-on: ubuntu-latest
     steps:
@@ -70,18 +71,38 @@ jobs:
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
-    - name: Image ID to AWS ECS task definition
-      id: task-def
-      uses: aws-actions/amazon-ecs-render-task-definition@v1
-      with:
-        task-definition: task-definition.json
-        container-name: james-nick
-        image: 603825719481.dkr.ecr.eu-west-2.amazonaws.com/james-nick:${{ github.sha }}
+  terraform:
+    needs: [deploy]
+    name: 'terraform'
+    runs-on: ubuntu-latest
+    env: 
+      TF_VAR_ECR_REPO: $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+    
+    defaults:
+      run:
+        shell: bash
+        working-directory: Terraform
 
-    - name: Deploy Amazon ECS task definition
-      uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
       with:
-        task-definition: ${{ steps.task-def.outputs.task-definition }}
-        service: web
-        cluster: james-nick
-        wait-for-service-stability: true
+        terraform_wrapper: false
+        cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+    - name: Terraform Init
+      run: terraform init
+
+    - name: Terraform Format
+      run: terraform fmt -check
+      
+    - name: Terraform Plan
+      run: terraform plan
+     
+    - name: Terraform Apply
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      run: terraform apply -auto-approve

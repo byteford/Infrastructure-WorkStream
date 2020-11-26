@@ -22,17 +22,12 @@ module "CW" {
   loadbalancer_arn = module.Network.loadbalancer.arn_suffix
   scaling_policy   = module.ECS.scaling_policy.arn
 }
-module "ECR" {
-  source = "./ECR"
-  name   = var.name
-  owner  = var.owner
-}
 module "ECS" {
   depends_on = [module.Network]
   source     = "./ECS"
   name       = var.name
   owner      = var.owner
-  Repo_URL   = module.ECR.repo_url
+  Repo_URL   = var.ECR_REPO
   subnets    = module.Network.subnet_public.*.id
   SecGroup   = module.Network.SecGroupAll.id
   lbTarget   = module.Network.lbTarget.arn

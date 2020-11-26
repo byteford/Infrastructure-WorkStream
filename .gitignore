@@ -109,3 +109,4 @@ cypress/screenshots/
 cypress/videos
 
 Terraform/.terraform/
+Terraform_Base/.terraform
