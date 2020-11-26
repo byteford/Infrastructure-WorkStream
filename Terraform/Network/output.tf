@@ -7,3 +7,7 @@ output "SecGroupAll" {
 output "lbTarget" {
   value = aws_lb_target_group.main
 }
+
+output "loadbalancer" {
+  value = aws_lb.main
+}
