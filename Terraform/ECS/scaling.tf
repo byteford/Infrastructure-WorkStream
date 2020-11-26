@@ -10,14 +10,16 @@ resource "aws_appautoscaling_policy" "ecs_policy" {
   service_namespace  = aws_appautoscaling_target.ecs_target.service_namespace
   scalable_dimension = aws_appautoscaling_target.ecs_target.scalable_dimension
   resource_id        = aws_appautoscaling_target.ecs_target.resource_id
-  policy_type        = "TargetTrackingScaling"
+  policy_type        = "StepScaling"
 
-  target_tracking_scaling_policy_configuration {
-    predefined_metric_specification {
-      predefined_metric_type = "ECSServiceAverageCPUUtilization"
+  step_scaling_policy_configuration {
+    adjustment_type         = "ChangeInCapacity"
+    cooldown                = 60
+    metric_aggregation_type = "Average"
+
+    step_adjustment {
+      metric_interval_lower_bound = 1
+      scaling_adjustment          = 1
     }
-    disable_scale_in   = true
-    target_value       = 75
-    scale_out_cooldown = 300
   }
 }

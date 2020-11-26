@@ -13,3 +13,7 @@ variable "res_threshold" {
   type    = number
   default = 1
 }
+
+variable "scaling_policy" {
+  type = string
+}

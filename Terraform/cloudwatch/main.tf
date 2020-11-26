@@ -1,5 +1,6 @@
 resource "aws_cloudwatch_metric_alarm" "response_time" {
   alarm_name                = var.name
+  alarm_actions             = [var.scaling_policy]
   comparison_operator       = "GreaterThanOrEqualToThreshold"
   evaluation_periods        = "1"
   metric_name               = "TargetResponseTime"

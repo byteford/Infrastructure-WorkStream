@@ -20,6 +20,7 @@ module "CW" {
   name             = var.name
   owner            = var.owner
   loadbalancer_arn = module.Network.loadbalancer.arn_suffix
+  scaling_policy   = module.ECS.scaling_policy.arn
 }
 module "ECR" {
   source = "./ECR"
