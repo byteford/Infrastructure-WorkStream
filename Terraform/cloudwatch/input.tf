@@ -5,7 +5,7 @@ variable "owner" {
   type = string
 }
 
-variable "loadbalancer_arn_suffix" {
+variable "loadbalancer_arn" {
   type = string
 }
 

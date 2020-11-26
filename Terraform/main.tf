@@ -16,10 +16,10 @@ module "Network" {
   owner  = var.owner
 }
 module "CW" {
-  source                  = "./cloudwatch"
-  name                    = var.name
-  owner                   = var.owner
-  loadbalancer_arn_suffix = module.Network.loadbalancer.arn_suffix
+  source           = "./cloudwatch"
+  name             = var.name
+  owner            = var.owner
+  loadbalancer_arn = module.Network.loadbalancer.arn
 }
 module "ECR" {
   source = "./ECR"
